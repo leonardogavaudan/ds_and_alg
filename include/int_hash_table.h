@@ -11,8 +11,10 @@ typedef struct hashTable {
   HashItem **hashItems;
 } HashTable;
 
-HashTable *createHashTable(uint16_t maxSize);
+void freeHashTable(HashTable *hashTable);
 
-void setHashItem(HashTable *hashTable, int16_t key, int32_t value);
+HashTable *createHashTable(uint16_t size);
 
-int32_t getHashItemValue(HashTable *hashTable, int16_t key);
+int8_t setHashItem(HashTable *hashTable, int16_t key, int32_t value);
+
+HashItem *getHashItem(HashTable *hashTable, int16_t key);
