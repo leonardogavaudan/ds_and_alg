@@ -1,16 +1,15 @@
-#include <stdint.h>
 #include <stdlib.h>
 
 #define MAX_LOAD_FACTOR 0.75
 
 typedef struct hashItem {
-  int16_t key;
-  int32_t value;
+  int key;
+  int value;
 } HashItem;
 
 typedef struct hashTable {
-  uint16_t size;
-  uint16_t maxSize;
+  int size;
+  int maxSize;
   HashItem **hashItems;
 } HashTable;
 
@@ -32,7 +31,7 @@ void freeHashTable(HashTable *hashTable) {
   freeHashTableWithoutItems(hashTable);
 }
 
-HashTable *createHashTable(uint16_t size) {
+HashTable *createHashTable(int size) {
   HashTable *hashTable = malloc(sizeof(HashTable));
   if (hashTable == NULL) {
     return NULL;
@@ -53,11 +52,9 @@ HashTable *createHashTable(uint16_t size) {
   return hashTable;
 }
 
-int16_t getHash(HashTable *hashTable, int16_t key) {
-  return key % hashTable->maxSize;
-}
+int getHash(HashTable *hashTable, int key) { return key % hashTable->maxSize; }
 
-int16_t getHashWithoutConflict(HashTable *hashTable, int16_t hash) {
+int getHashWithoutConflict(HashTable *hashTable, int hash) {
   int initialHash = hash;
 
   while (hashTable->hashItems[hash] != NULL) {
@@ -81,8 +78,8 @@ HashTable *resizeHashTable(HashTable *hashTable) {
       continue;
     }
 
-    int16_t hash = getHash(newHashTable, hashTable->hashItems[i]->key);
-    int16_t hashWithoutConflict = getHashWithoutConflict(newHashTable, hash);
+    int hash = getHash(newHashTable, hashTable->hashItems[i]->key);
+    int hashWithoutConflict = getHashWithoutConflict(newHashTable, hash);
     if (hashWithoutConflict == -1) {
       return NULL;
     }
@@ -94,9 +91,8 @@ HashTable *resizeHashTable(HashTable *hashTable) {
   return newHashTable;
 }
 
-int8_t setHashItemWithoutResizing(HashTable *hashTable, int16_t key,
-                                  int32_t value) {
-  int16_t hash = getHash(hashTable, key);
+int setHashItemWithoutResizing(HashTable *hashTable, int key, int value) {
+  int hash = getHash(hashTable, key);
 
   int initialHash = hash;
   while (hashTable->hashItems[hash] != NULL &&
@@ -122,7 +118,7 @@ int8_t setHashItemWithoutResizing(HashTable *hashTable, int16_t key,
   return 1;
 }
 
-int8_t setHashItem(HashTable *hashTable, int16_t key, int32_t value) {
+int setHashItem(HashTable *hashTable, int key, int value) {
   if (((float)hashTable->size / hashTable->maxSize) > MAX_LOAD_FACTOR) {
     HashTable *newHashTable = resizeHashTable(hashTable);
     if (newHashTable == NULL) {
@@ -135,9 +131,9 @@ int8_t setHashItem(HashTable *hashTable, int16_t key, int32_t value) {
   return setHashItemWithoutResizing(hashTable, key, value);
 }
 
-HashItem *getHashItemByKey(HashTable *hashTable, int16_t key) {
-  int16_t hash = getHash(hashTable, key);
-  int16_t initialHash = hash;
+HashItem *getHashItemByKey(HashTable *hashTable, int key) {
+  int hash = getHash(hashTable, key);
+  int initialHash = hash;
 
   while (hashTable->hashItems[hash] != NULL) {
     if (hashTable->hashItems[hash]->key == key) {
