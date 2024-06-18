@@ -1,29 +1,16 @@
-def quick_sort_recurse(my_list: list[int], low: int, high: int):
-    if len(my_list) == 1:
-        return my_list
+def quick_sort(lst: list[int]):
+    if len(lst) < 2:
+        return lst
 
-    pivot = my_list[high - 1]
-    pivot_final_index = low
+    pivot = lst[0]
 
-    for j in range(low, high):
-        if my_list[j] < pivot:
-            my_list[pivot_final_index], my_list[j] = (
-                my_list[j],
-                my_list[pivot_final_index],
-            )
-            pivot_final_index += 1
+    less = [i for i in lst[1:] if i <= pivot]
+    greater = [i for i in lst[1:] if i > pivot]
 
-    my_list[high - 1], my_list[pivot_final_index] = (
-        my_list[pivot_final_index],
-        my_list[high - 1],
-    )
-
-    quick_sort_recurse(my_list, low, pivot_final_index - 1)
-    quick_sort_recurse(my_list, pivot_final_index + 1, high)
+    return quick_sort(less) + [pivot] + quick_sort(greater)
 
 
-def quick_sort(my_list: list[int]):
-    low = 0
-    high = len(my_list) - 1
+lst = [3, 4, 9, 7, 3, 3, 1, 8, 7, 4, 9]
+res = quick_sort(lst)
 
-    quick_sort_recurse(my_list, low, high)
+print(res)
