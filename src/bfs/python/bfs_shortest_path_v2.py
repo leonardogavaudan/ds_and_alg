@@ -27,9 +27,9 @@ def bfs(graph, start, target):
     return None
 
 
-graph = {"A": ["B", "C"], "B": ["D", "E"], "C": ["F"], "D": [], "E": ["F"], "F": []}
-start_node = "A"
-target_node = "F"
-path = bfs(graph, start_node, target_node)
-
-print("Path from", start_node, "to", target_node, ":", path)
+if __name__ == "__main__":
+    graph = {"A": ["B", "C"], "B": ["D", "E"], "C": ["F"], "D": [], "E": ["F"], "F": []}
+    start_node = "A"
+    target_node = "F"
+    path = bfs(graph, start_node, target_node)
+    print("Path from", start_node, "to", target_node, ":", path)

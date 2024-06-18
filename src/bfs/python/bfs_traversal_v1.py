@@ -1,10 +1,5 @@
 from collections import deque
 
-# Define the graph using an adjacency list
-graph = {"A": ["B", "C"], "B": ["D", "E"], "C": ["F"], "D": [], "E": ["F"], "F": []}
-
-# Initialize visited set to keep track of visited nodes
-
 
 def bfs(graph, start):
     seen = set()
@@ -21,5 +16,6 @@ def bfs(graph, start):
                 seen.add(neighbour_node)
 
 
-# Run BFS (You can uncomment this line when ready to test)
-bfs(graph, "A")
+if __name__ == "__main__":
+    graph = {"A": ["B", "C"], "B": ["D", "E"], "C": ["F"], "D": [], "E": ["F"], "F": []}
+    bfs(graph, "A")
