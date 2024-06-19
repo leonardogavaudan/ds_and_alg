@@ -11,7 +11,7 @@ def selection_sort(arr: List[int]) -> None:
 
 
 if __name__ == "__main__":
-    test_casearr = [64, 25, 12, 22, 11]
-    print("Original array:", test_casearr)
-    selection_sort(test_casearr)
-    print("Sorted array:", test_casearr)
+    arr = [64, 25, 12, 22, 11]
+    print("Original array:", arr)
+    selection_sort(arr)
+    print("Sorted array:", arr)
