@@ -11,6 +11,7 @@ def bfs_traversal(graph: Dict[str, List[str]], start_node: str) -> None:
 
         for neighbor_node in graph[current_node]:
             if neighbor_node not in nodes_seen:
+                nodes_seen.add(neighbor_node)
                 queue.append(neighbor_node)
 
         print(current_node)
