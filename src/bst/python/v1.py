@@ -1,16 +1,18 @@
 from typing import Optional
 
+
 class Node:
     def __init__(self, key):
         self.key = key
         self.left = None
         self.right = None
 
+
 class BST:
     def __init__(self, root: Optional[Node] = None):
         self.root = root
 
-    def insert_recursive(self, current_node: Node,  insert_node: Node):
+    def insert_recursive(self, current_node: Node, insert_node: Node):
         if insert_node.key < current_node.key:
             if current_node.left is None:
                 current_node.left = insert_node
@@ -38,7 +40,6 @@ class BST:
         else:
             return self.search_recursive(current_node.right, key)
 
-
     def search(self, key):
         if self.root is None:
             return None
@@ -61,7 +62,7 @@ class BST:
             return current_node
 
         if current_node.left is None and current_node.right is None:
-            return None 
+            return None
         if current_node.left is None:
             return current_node.right
         if current_node.right is None:
@@ -73,16 +74,15 @@ class BST:
 
         return current_node
 
-    
     def delete(self, key):
         self.root = self.recurse_delete(self.root, key)
 
-    def inorder_traversal(self, node = None, result = None):
+    def inorder_traversal(self, node=None, result=None):
         if node is None:
             node = self.root
         if result is None:
             result = []
-        
+
         if node.right:
             self.inorder_traversal(node.right, result)
         result.append(node.key)
@@ -111,4 +111,3 @@ if __name__ == "__main__":
     # Delete a node with two children
     bst.delete(50)
     print("In-order traversal after deleting 50:", bst.inorder_traversal())
-
