@@ -18,7 +18,7 @@ def heapify(arr: List[int], n: int, i: int) -> None:
 
 
 def build_heap(arr: List[int]) -> List[int]:
-    for i in range(len(arr) // 2 - 1):
+    for i in range(len(arr) // 2 - 1, -1, -1):
         heapify(arr, len(arr), i)
     return arr
 
